@@ -30,8 +30,102 @@ h1 {
 .subtitle {
   text-align: center;
   color: #a0a0a0;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   font-size: 1.1rem;
+}
+
+.mobile-notice {
+  background: #2a4a6a;
+  border: 1px solid #3a5a7a;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.mobile-notice p {
+  margin: 0;
+  color: #e0e0e0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.examples-section {
+  margin-bottom: 2rem;
+}
+
+.examples-section h2 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: #ffffff;
+  text-align: center;
+}
+
+.example-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.example-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  background: #2a2a2a;
+  border: 2px solid #333;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #e0e0e0;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.example-link:hover {
+  background: #333;
+  border-color: #4a9eff;
+  transform: translateY(-2px);
+}
+
+.link-icon {
+  font-size: 1.5rem;
+}
+
+.link-text {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.youtube-link:hover {
+  border-color: #ff0000;
+}
+
+.linkedin-link:hover {
+  border-color: #0077b5;
+}
+
+.divider {
+  text-align: center;
+  margin: 2rem 0;
+  position: relative;
+}
+
+.divider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #333;
+}
+
+.divider span {
+  background: #1a1a1a;
+  padding: 0 16px;
+  color: #666;
+  position: relative;
+  font-size: 0.9rem;
 }
 
 .input-section {
@@ -93,6 +187,39 @@ h1 {
   color: #ffffff;
 }
 
+.toggle-btn {
+  width: 100%;
+  padding: 12px 16px;
+  background: #333;
+  border: 1px solid #444;
+  border-radius: 6px;
+  color: #e0e0e0;
+  font-size: 0.95rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  transition: background 0.2s;
+}
+
+.toggle-btn:hover {
+  background: #3a3a3a;
+}
+
+.toggle-icon {
+  font-size: 0.8rem;
+  transition: transform 0.2s;
+}
+
+.deep-links-content {
+  margin-top: 1rem;
+}
+
+.deep-links-content.hidden {
+  display: none;
+}
+
 .json-output {
   background: #1a1a1a;
   padding: 16px;
@@ -103,47 +230,7 @@ h1 {
   line-height: 1.5;
   color: #e0e0e0;
   border: 1px solid #333;
-  margin-bottom: 1.5rem;
   white-space: pre-wrap;
   word-wrap: break-word;
-}
-
-.action-buttons {
-  display: flex;
-  gap: 12px;
-}
-
-.action-btn {
-  flex: 1;
-  padding: 12px 24px;
-  font-size: 1rem;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 500;
-  transition: opacity 0.2s;
-}
-
-.action-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.ios-btn {
-  background: #007aff;
-  color: white;
-}
-
-.ios-btn:not(:disabled):hover {
-  background: #0066cc;
-}
-
-.android-btn {
-  background: #3ddc84;
-  color: #1a1a1a;
-}
-
-.android-btn:not(:disabled):hover {
-  background: #2dcc74;
 }
 
