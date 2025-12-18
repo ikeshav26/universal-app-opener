@@ -2,6 +2,44 @@
 
 A JavaScript library that converts standard HTTP URLs (YouTube, LinkedIn) into Native Mobile Deep Links (Custom Schemes & Android Intents).
 
+## ⚠️ Development Status
+
+**This package is currently in active development and may not work as expected.** Use at your own risk. Breaking changes may occur in future versions.
+
+## Installation
+
+**📦 [View on npm](https://www.npmjs.com/package/universal-app-opener)**
+
+```bash
+npm install universal-app-opener
+```
+
+```bash
+pnpm add universal-app-opener
+```
+
+```bash
+yarn add universal-app-opener
+```
+
+## Quick Start
+
+```typescript
+import { generateDeepLink, detectOS } from "universal-app-opener";
+
+const result = generateDeepLink("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+console.log(result.ios); // vnd.youtube://watch?v=dQw4w9WgXcQ
+console.log(result.android); // intent://watch?v=...
+```
+
+## Demo
+
+Try it out: **[Live Demo](https://mdsaban.github.io/universal-app-opener/)**
+
+## Documentation
+
+For detailed usage, API reference, and examples, see the [package documentation](./packages/core/README.md).
+
 ## Goal
 
 The goal of this project is to provide a lightweight, zero-dependency library that can detect platform-specific deep links from common web URLs. This enables web applications to seamlessly redirect users to native mobile apps when available, improving user experience across platforms.
