@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Universal App Opener - Demo</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Universal App Opener</h1>
+      <p class="subtitle">Convert HTTP URLs to Native Mobile Deep Links</p>
+      
+      <div class="input-section">
+        <input 
+          type="text" 
+          id="urlInput" 
+          placeholder="Paste a URL here (YouTube/LinkedIn)"
+          class="url-input"
+        />
+        <button id="generateBtn" class="generate-btn">Generate Deep Links</button>
+      </div>
+      
+      <div id="outputSection" class="output-section hidden">
+        <h2>Generated Deep Links</h2>
+        <pre id="jsonOutput" class="json-output"></pre>
+        
+        <div class="action-buttons">
+          <button id="iosBtn" class="action-btn ios-btn" disabled>Open on iOS</button>
+          <button id="androidBtn" class="action-btn android-btn" disabled>Open on Android</button>
+        </div>
+      </div>
+    </div>
+    
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
+
