@@ -12,10 +12,10 @@ export const linkedinHandler: DeepLinkHandler = {
       // Profile
       ['profile', /linkedin\.com\/in\/([^/?#]+)/],
 
-      // Post
+      // Post (posts)
       ['post', /linkedin\.com\/posts\/([^/?#]+)/],
 
-      // Post
+      // Post (feed update)
       ['post', /linkedin\.com\/feed\/update\/(?:urn:li:activity:)?([^/?#]+)/],
 
       // Company
@@ -28,7 +28,6 @@ export const linkedinHandler: DeepLinkHandler = {
     for (const [type, regex] of patterns) {
       const m = url.match(regex);
       if (m) {
-      
         // Normalize into a predictable match array
         return [m[0], type, m[1]] as RegExpMatchArray;
       }
@@ -46,7 +45,7 @@ export const linkedinHandler: DeepLinkHandler = {
         return {
           webUrl,
           ios: `linkedin://in/${id}`,
-          android: `https://www.linkedin.com/in/${id}/`,
+          android: `intent://in/${id}#Intent;scheme=linkedin;package=com.linkedin.android;end`,
           platform: 'linkedin',
         };
 
