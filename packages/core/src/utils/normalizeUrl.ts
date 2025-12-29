@@ -10,17 +10,11 @@ export function normalizeUrl(input: string): string {
   try {
     url = new URL(urlStr);
   } catch {
-    return input; // fallback safely
+    return urlStr; // fallback safely
   }
 
   // 2. Normalize hostname
-  if (url.hostname.startsWith('m.')) {
-    url.hostname = url.hostname.slice(2);
-  }
-
-  if (url.hostname.startsWith('www.')) {
-    url.hostname = url.hostname.slice(4);
-  }
+  url.hostname = url.hostname.replace(/^(m\.|www\.)+/i, '');
 
   // 3. Remove tracking params
   for (const key of Array.from(url.searchParams.keys())) {
