@@ -1,36 +1,28 @@
 import { DeepLinkHandler } from '../types';
 
 export const githubHandler: DeepLinkHandler = {
-  match: (url) => url.match(/github\.com\/([^\/\?#]+)(?:\/([^\/\?#]+)(?:\/(pull|blob)\/([^\?#]+))?)?/),
+  match: (url) =>
+    url.match(/github\.com\/([^\/\?#]+)(?:\/([^\/\?#]+)(?:\/([^\/\?#]+)\/([^\?#]+))?)?/),
 
   build: (webUrl, match) => {
-    const owner = match[1];
-    const repo = match[2];
-    const type = match[3];
-    const remainder = match[4];
+    const [owner, repo, type, remainder] = match;
 
-    // PR's and Blobs
-    if (repo && type && remainder) {
-      if (type === 'pull') {
-        return {
-          webUrl,
-          ios: `github://repo/${owner}/${repo}/pull/${remainder}`,
-          android: `intent://github.com/${owner}/${repo}/pull/${remainder}#Intent;scheme=https;package=com.github.android;end`,
-          platform: 'github',
-        };
-      }
-      
-      if (type === 'blob') {
-        return {
-          webUrl,
-          ios: `github://repo/${owner}/${repo}/blob/${remainder}`,
-          android: `intent://github.com/${owner}/${repo}/blob/${remainder}#Intent;scheme=https;package=com.github.android;end`,
-          platform: 'github',
-        };
-      }
+    const subRoutes: Record<string, { ios: string; android: string }> = {
+      pull: { ios: 'pull', android: 'pull' },
+      blob: { ios: 'blob', android: 'blob' },
+      issues: { ios: 'issue', android: 'issues' },
+    };
+
+    if (repo && type && remainder && subRoutes[type]) {
+      const route = subRoutes[type];
+      return {
+        webUrl,
+        ios: `github://repo/${owner}/${repo}/${route.ios}/${remainder}`,
+        android: `intent://github.com/${owner}/${repo}/${route.android}/${remainder}#Intent;scheme=https;package=com.github.android;end`,
+        platform: 'github',
+      };
     }
 
-    // repo
     if (repo) {
       return {
         webUrl,
@@ -40,7 +32,6 @@ export const githubHandler: DeepLinkHandler = {
       };
     }
 
-    // profile
     return {
       webUrl,
       ios: `github://user/${owner}`,
