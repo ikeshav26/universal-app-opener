@@ -10,12 +10,8 @@ import { DeepLinkHandler } from '../types';
  * - Archive pages: https://example.substack.com/archive
  *
  * Note: Substack uses Universal Links (iOS) and App Links (Android) rather than
- * custom URL schemes. The app will intercept HTTPS URLs if installed.
- * We provide the HTTPS URL as fallback since the native app handles these directly.
- *
- * Deep link approach:
- * - iOS: Uses substack:// scheme with path
- * - Android: Uses intent with substack scheme
+ * custom URL schemes. The native app intercepts HTTPS URLs directly when installed.
+ * We return the HTTPS URL for both iOS and Android, which the app will handle.
  */
 export const substackHandler: DeepLinkHandler = {
   match: (url) => {
@@ -23,18 +19,16 @@ export const substackHandler: DeepLinkHandler = {
     return url.match(/^https?:\/\/([a-z0-9-]+)\.substack\.com(\/(?:p\/[^/?#]+|about|archive)?)?/i);
   },
 
-  build: (webUrl, match) => {
-    const publication = match[1];
-    const path = match[2] || '';
-
-    // Construct the deep link path
-    const deepLinkPath = `${publication}${path}`;
-
+  build: (webUrl) => {
+    // Substack uses Universal Links (iOS) and App Links (Android)
+    // The native app intercepts HTTPS URLs directly - no custom scheme exists
+    // Return the HTTPS URL for both platforms; the OS handles app interception
     return {
       webUrl,
-      // Substack app uses substack:// scheme
-      ios: `substack://${deepLinkPath}`,
-      android: `intent://${deepLinkPath}#Intent;scheme=substack;package=com.substack.app;end`,
+      // iOS: Universal Links - the Substack app intercepts HTTPS URLs
+      ios: webUrl,
+      // Android: App Links - the Substack app intercepts HTTPS URLs
+      android: webUrl,
       platform: 'substack',
     };
   },
